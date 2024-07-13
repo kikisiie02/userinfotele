@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload ODP Images</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <script>
         function displayUserInfo() {
@@ -11,6 +12,8 @@
 
             if (user) {
                 document.getElementById('user-id').value = user.id || 'N/A';
+                document.getElementById('user-id-display').innerText = user.id || 'N/A';
+                document.getElementById('username-display').innerText = user.username || user.first_name || 'N/A';
             }
         }
 
@@ -29,37 +32,71 @@
                 alert('Files uploaded successfully!');
             }).doPost(formData);
         }
+
+        document.addEventListener('DOMContentLoaded', displayUserInfo);
     </script>
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .user-info {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
-<body onload="displayUserInfo()">
-    <h1>Upload ODP Images</h1>
-    <form id="uploadForm" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
-        <input type="hidden" id="user-id" name="userId">
-        <input type="hidden" id="folderId" name="folderId">
-        <label for="nama_odp">Nama ODP:</label>
-        <input type="text" id="nama_odp" name="namaOdp" required><br><br>
-        
-        <label for="tipe_odp">Pilih Tipe ODP:</label>
-        <select id="tipe_odp" name="tipeOdp" required>
-            <option value="AERIAL">AERIAL</option>
-            <option value="PEDESTAL">PEDESTAL</option>
-        </select><br><br>
-
-        <div id="aerialFields" style="display:none;">
-            <label for="tampakjauhsebelum">Foto ODP Tampak Jauh Sebelum:</label>
-            <input type="file" id="tampakjauhsebelum" name="files" accept="image/*" required><br><br>
-            <!-- Tambahkan field input gambar lainnya untuk AERIAL -->
+<body>
+    <div class="container">
+        <h1 class="text-center">Upload ODP Images</h1>
+        <div class="user-info text-center">
+            <p><strong>ID Telegram:</strong> <span id="user-id-display"></span></p>
+            <p><strong>Nama:</strong> <span id="username-display"></span></p>
         </div>
-
-        <div id="pedestalFields" style="display:none;">
-            <label for="labelodpsebelum">Foto Label ODP Sebelum:</label>
-            <input type="file" id="labelodpsebelum" name="files" accept="image/*" required><br><br>
-            <!-- Tambahkan field input gambar lainnya untuk PEDESTAL -->
-        </div>
-
-        <button type="submit">Upload</button>
-    </form>
-
+        <form id="uploadForm" enctype="multipart/form-data" onsubmit="handleSubmit(event)" class="form-horizontal">
+            <input type="hidden" id="user-id" name="userId">
+            <input type="hidden" id="folderId" name="folderId">
+            <div class="form-group">
+                <label for="nama_odp" class="col-sm-2 control-label">Nama ODP:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="nama_odp" name="namaOdp" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tipe_odp" class="col-sm-2 control-label">Pilih Tipe ODP:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="tipe_odp" name="tipeOdp" required>
+                        <option value="AERIAL">AERIAL</option>
+                        <option value="PEDESTAL">PEDESTAL</option>
+                    </select>
+                </div>
+            </div>
+            <div id="aerialFields" style="display:none;">
+                <div class="form-group">
+                    <label for="tampakjauhsebelum" class="col-sm-2 control-label">Foto ODP Tampak Jauh Sebelum:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tampakjauhsebelum" name="files" accept="image/*" required>
+                    </div>
+                </div>
+                <!-- Tambahkan field input gambar lainnya untuk AERIAL -->
+            </div>
+            <div id="pedestalFields" style="display:none;">
+                <div class="form-group">
+                    <label for="labelodpsebelum" class="col-sm-2 control-label">Foto Label ODP Sebelum:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="labelodpsebelum" name="files" accept="image/*" required>
+                    </div>
+                </div>
+                <!-- Tambahkan field input gambar lainnya untuk PEDESTAL -->
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         document.getElementById('tipe_odp').addEventListener('change', function () {
             var aerialFields = document.getElementById('aerialFields');
