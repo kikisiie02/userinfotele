@@ -65,6 +65,24 @@
             margin: 5px;
             max-height: 200px;
         }
+
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 <body>
@@ -81,6 +99,27 @@
                 <label for="nama_odp" class="col-sm-2 control-label">Nama ODP:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="nama_odp" name="namaOdp" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sto" class="col-sm-2 control-label">STO:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="sto" name="STO" required>
+                        <option value="ZZ">PILIH STO</option>
+                        <option value="PGG">PGG</option>
+                        <option value="PDK">PDK</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="odc" class="col-sm-2 control-label">ODC:</label>
+                <div class="col-sm-10">
+                    <div style="display: flex; align-items: center;">
+                        <select class="form-control" id="odc" name="ODC" required disabled>
+                            <option value="PILIH ODC">PILIH ODC</option>
+                        </select>
+                        <div class="spinner" id="loadingSpinner"></div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -230,6 +269,118 @@
                         <div id="labelodpsebelum-preview" class="preview-container"></div>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label for="tampakjauhsebelum" class="col-sm-2 control-label">Foto ODP Tampak Jauh Sebelum (30cm dari ODP, ODP DI BUKA):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tampakjauhsebelum" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="tampakjauhsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tampakdekatsebelum" class="col-sm-2 control-label">Foto ODP Tampak Dekat Sebelum (Pigtail Terlihat Semua, ODP DI BUKA):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tampakdekatsebelum" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="tampakdekatsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bawahodpsebelum" class="col-sm-2 control-label">Foto Bawah ODP Sebelum:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="bawahodpsebelum" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="bawahodpsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="opm" class="col-sm-2 control-label">Foto OPM:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="opm" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="opm-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pitholesebelum" class="col-sm-2 control-label">Foto PIT HOLE (Hand Hole) Sebelum:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="pitholesebelum" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="pitholesebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="proses1" class="col-sm-2 control-label">Foto Proses Perapihan ODP:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="proses1" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="proses1-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="proses2" class="col-sm-2 control-label">Foto Proses Perapihan Hand Hole:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="proses2" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="proses2-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="labelodpsesudah" class="col-sm-2 control-label">Label ODP Sesudah:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="labelodpsesudah" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="labelodpsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tampakjauhsesudah" class="col-sm-2 control-label">Foto ODP Tampak Jauh Sesudah (30cm dari ODP, ODP DIBUKA):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tampakjauhsesudah" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="tampakjauhsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tampakdekatsesudah" class="col-sm-2 control-label">Foto ODP Tampak Dekat Sesudah (Pigtail Terlihat Semua, ODP DIBUKA):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tampakdekatsesudah" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="tampakdekatsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bawahodpsesudah" class="col-sm-2 control-label">Foto Bawah ODP Sesudah:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="bawahodpsesudah" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="bawahodpsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pitholesesudah" class="col-sm-2 control-label">Foto PIT HOLE (Hand Hole) Sesudah:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="pitholesesudah" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="pitholesesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valin1" class="col-sm-2 control-label">Hasil VALINS (REDAMAN):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="valin1" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="valin1-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valin2" class="col-sm-2 control-label">Hasil VALINS (SUMMARY):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="valin2" name="files" accept="image/*" onchange="previewImages(event)">
+                        <div id="valin2-preview" class="preview-container"></div>
+                    </div>
+                </div>
                 <!-- Tambahkan field input gambar lainnya untuk PEDESTAL -->
             </div>
             <div class="form-group">
@@ -240,6 +391,7 @@
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
@@ -255,6 +407,40 @@
             }
             createFolder();
         });
+
+
+        $(document).ready(function(){
+        $('#sto').change(function(){
+            var sto = $(this).val();
+            var url = 'https://script.google.com/macros/s/AKfycbzGaRIpsFjl6oIK5PVVneEsaiiJN0hqFgD76XTgLB3APACOfRpUt0OyBJ7OT1iwfJEBKw/exec' + '?sto=' + sto; // Update this to your Apps Script web app URL
+
+            if(sto == 'ZZ') {
+                $('#odc').html('<option value="PILIH ODC">PILIH ODC</option>');
+                return;
+            }
+
+            $('#loadingSpinner').show();
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var options = '<option value="PILIH ODC">PILIH ODC</option>';
+                    $.each(data, function(index, value) {
+                        options += '<option value="'+ value +'">'+ value +'</option>';
+                    });
+                    $('#odc').html(options);
+                    $('#loadingSpinner').hide();
+                    $('#odc').prop('disabled', false);
+                },
+                error: function() {
+                    alert('Failed to retrieve ODC data.');
+                    $('#loadingSpinner').hide();
+                }
+            });
+        });
+    });
     </script>
 </body>
 </html>
