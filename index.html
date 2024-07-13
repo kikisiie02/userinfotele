@@ -15,14 +15,11 @@
 
     // Get user info
     telegramWebView.ready().then(function() {
-      telegramWebView.MainButton.show();
-      telegramWebView.MainButton.onClick(function() {
-        telegramWebView.postEvent('get_user_info', function(userInfo) {
-          document.body.innerHTML += '<p>User ID: ' + userInfo.user_id + '</p>';
-          document.body.innerHTML += '<p>Username: ' + userInfo.username + '</p>';
-          document.body.innerHTML += '<p>First Name: ' + userInfo.first_name + '</p>';
-          document.body.innerHTML += '<p>Last Name: ' + userInfo.last_name + '</p>';
-        });
+      telegramWebView.getUserInfo().then(function(userInfo) {
+        document.body.innerHTML += '<p>User ID: ' userInfo.id + '</p>';
+        document.body.innerHTML += '<p>Username: ' userInfo.username + '</p>';
+        document.body.innerHTML += '<p>First Name: ' userInfo.first_name + '</p>';
+        document.body.innerHTML += '<p>Last Name: ' userInfo.last_name + '</p>';
       });
     });
   </script>
