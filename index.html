@@ -3,30 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Info</title>
+    <title>Upload ODP Images</title>
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <script>
         function displayUserInfo() {
             const user = Telegram.WebApp.initDataUnsafe.user;
 
             if (user) {
-                document.getElementById('user-id').innerText = user.id || 'N/A';
-                document.getElementById('first-name').innerText = user.first_name || 'N/A';
-                document.getElementById('last-name').innerText = user.last_name || 'N/A';
-                document.getElementById('username').innerText = user.username || 'N/A';
-            } else {
-                document.getElementById('user-info').innerText = 'User information not available.';
+                document.getElementById('user-id').value = user.id || 'N/A';
             }
+        }
+
+        function createFolder() {
+            var namaOdp = document.getElementById('nama_odp').value;
+            google.script.run.withSuccessHandler(function(folderId) {
+                document.getElementById('folderId').value = folderId;
+            }).createFolder(namaOdp);
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            var form = document.getElementById('uploadForm');
+            var formData = new FormData(form);
+            google.script.run.withSuccessHandler(function() {
+                alert('Files uploaded successfully!');
+            }).doPost(formData);
         }
     </script>
 </head>
 <body onload="displayUserInfo()">
-    <h1>Welcome to the Mini App!</h1>
-    <div id="user-info">
-        <p><strong>User ID:</strong> <span id="user-id"></span></p>
-        <p><strong>First Name:</strong> <span id="first-name"></span></p>
-        <p><strong>Last Name:</strong> <span id="last-name"></span></p>
-        <p><strong>Username:</strong> <span id="username"></span></p>
-    </div>
+    <h1>Upload ODP Images</h1>
+    <form id="uploadForm" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
+        <input type="hidden" id="user-id" name="userId">
+        <input type="hidden" id="folderId" name="folderId">
+        <label for="nama_odp">Nama ODP:</label>
+        <input type="text" id="nama_odp" name="namaOdp" required><br><br>
+        
+        <label for="tipe_odp">Pilih Tipe ODP:</label>
+        <select id="tipe_odp" name="tipeOdp" required>
+            <option value="AERIAL">AERIAL</option>
+            <option value="PEDESTAL">PEDESTAL</option>
+        </select><br><br>
+
+        <div id="aerialFields" style="display:none;">
+            <label for="tampakjauhsebelum">Foto ODP Tampak Jauh Sebelum:</label>
+            <input type="file" id="tampakjauhsebelum" name="files" accept="image/*" required><br><br>
+            <!-- Tambahkan field input gambar lainnya untuk AERIAL -->
+        </div>
+
+        <div id="pedestalFields" style="display:none;">
+            <label for="labelodpsebelum">Foto Label ODP Sebelum:</label>
+            <input type="file" id="labelodpsebelum" name="files" accept="image/*" required><br><br>
+            <!-- Tambahkan field input gambar lainnya untuk PEDESTAL -->
+        </div>
+
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        document.getElementById('tipe_odp').addEventListener('change', function () {
+            var aerialFields = document.getElementById('aerialFields');
+            var pedestalFields = document.getElementById('pedestalFields');
+            if (this.value === 'AERIAL') {
+                aerialFields.style.display = 'block';
+                pedestalFields.style.display = 'none';
+            } else {
+                aerialFields.style.display = 'none';
+                pedestalFields.style.display = 'block';
+            }
+            createFolder();
+        });
+    </script>
 </body>
 </html>
