@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Info</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <h1>User Info</h1>
+  <script>
+    // Initialize Telegram WebView
+    var telegramWebView = new Telegram.WebView({
+      version: '1.0',
+      dev: true
+    });
+
+    // Get user info
+    telegramWebView.ready().then(function() {
+      telegramWebView.MainButton.show();
+      telegramWebView.MainButton.onClick(function() {
+        telegramWebView.postEvent('get_user_info', function(userInfo) {
+          document.body.innerHTML += '<p>User ID: ' + userInfo.user_id + '</p>';
+          document.body.innerHTML += '<p>Username: ' + userInfo.username + '</p>';
+          document.body.innerHTML += '<p>First Name: ' + userInfo.first_name + '</p>';
+          document.body.innerHTML += '<p>Last Name: ' + userInfo.last_name + '</p>';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
