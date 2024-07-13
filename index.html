@@ -69,7 +69,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center">Upload ODP Images</h1>
+        <h1 class="text-center">PROGRESS PROMAN</h1>
         <div class="user-info text-center">
             <p><strong>ID Telegram:</strong> <span id="user-id-display"></span></p>
             <p><strong>Nama:</strong> <span id="username-display"></span></p>
@@ -87,6 +87,7 @@
                 <label for="tipe_odp" class="col-sm-2 control-label">Pilih Tipe ODP:</label>
                 <div class="col-sm-10">
                     <select class="form-control" id="tipe_odp" name="tipeOdp" required>
+                        <option value="ZZ">PILIH TIPE ODP</option>
                         <option value="AERIAL">AERIAL</option>
                         <option value="PEDESTAL">PEDESTAL</option>
                     </select>
@@ -98,6 +99,125 @@
                     <div class="col-sm-10">
                         <input type="file" class="form-control" id="tampakjauhsebelum" name="files" accept="image/*" required onchange="previewImages(event)">
                         <div id="tampakjauhsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="labelodpsebelum" class="col-sm-2 control-label">Label ODP Sebelum:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="labelodpsebelum" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="labelodpsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tiangtampakjauhsebelum" class="col-sm-2 control-label">Foto Tiang Tampak Jauh Sebelum:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tiangtampakjauhsebelum" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="tiangtampakjauhsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ujungtiangsebelum" class="col-sm-2 control-label">Foto Ujung Tiang Sebelum:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="ujungtiangsebelum" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="ujungtiangsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tampakdekatsebelum" class="col-sm-2 control-label">Foto ODP Tampak Dekat Sebelum (Pigtail Terlihat Semua, ODP Dibuka):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tampakdekatsebelum" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="tampakdekatsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bawahodpsebelum" class="col-sm-2 control-label">Foto Bawah ODP Sebelum:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="bawahodpsebelum" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="bawahodpsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tiangsebelum" class="col-sm-2 control-label">Foto Tiang Tampak Dekat (Cat Warna Merah/Silver) Sebelum:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tiangsebelum" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="tiangsebelum-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="opm" class="col-sm-2 control-label">Foto OPM:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="opm" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="opm-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="proses" class="col-sm-2 control-label">Foto Progress:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="proses" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="proses-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tampakjauhsesudah" class="col-sm-2 control-label">Foto ODP Tampak Jauh Sesudah (30cm dari ODP, ODP Dibuka):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tampakjauhsesudah" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="tampakjauhsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="labelodpsesudah" class="col-sm-2 control-label">Label ODP Sesudah:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="labelodpsesudah" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="labelodpsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tiangtampakjauhsesudah" class="col-sm-2 control-label">Foto Tiang Tampak Jauh Sesudah:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tiangtampakjauhsesudah" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="tiangtampakjauhsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ujungtiangsesudah" class="col-sm-2 control-label">Foto Ujung Tiang Sesudah:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="ujungtiangsesudah" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="ujungtiangsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tampakdekatsesudah" class="col-sm-2 control-label">Foto ODP Tampak Dekat Sesudah (Pigtail Terlihat Semua, ODP Dibuka):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tampakdekatsesudah" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="tampakdekatsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bawahodpsesudah" class="col-sm-2 control-label">Foto Bawah ODP Sesudah:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="bawahodpsesudah" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="bawahodpsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tiangsesudah" class="col-sm-2 control-label">Foto Tiang Tampak Dekat (Cat Warna Merah/Silver) Sesudah:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="tiangsesudah" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="tiangsesudah-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="valin1" class="col-sm-2 control-label">Hasil VALINS (REDAMAN):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="valin1" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="valin1-preview" class="preview-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="valin2" class="col-sm-2 control-label">Hasil VALINS (SUMMARY):</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="valin2" name="files" accept="image/*" required onchange="previewImages(event)">
+                        <div id="valin2-preview" class="preview-container"></div>
                     </div>
                 </div>
                 <!-- Tambahkan field input gambar lainnya untuk AERIAL -->
@@ -138,4 +258,3 @@
     </script>
 </body>
 </html>
-
